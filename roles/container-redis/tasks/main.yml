@@ -1,15 +1,5 @@
 ---
 # tasks file for ansible-role-containers-redis
-# - name: Deploy docker to redis container host
-#   include_tasks: tasks/deploy-docker.yml
-#   vars:
-#     docker_packages:
-#       - docker
-#       - python-docker-py
-#   when: QUAY_REDIS_CONTAINERIZE
-#   tags:
-#     - redis
-
 - name: Configure firewall for Redis
   include_tasks: tasks/firewall-setup.yml
   vars:
@@ -31,7 +21,7 @@
     - redis
 
 - name: Deploy redis container
-  include_tasks: tasks/deploy-redis.yml
+  include_tasks: tasks/{{ container_runtime }}.yml
   when: QUAY_REDIS_CONTAINERIZE
   tags:
     - redis

@@ -1,5 +1,4 @@
 ---
-
 - name: Ensure firewalld is installed
   yum:
     name: firewalld

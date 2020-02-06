@@ -23,3 +23,22 @@
       - redis
       - database
       - docker
+
+# - name: Deploy docker to database container host
+#   include_tasks: tasks/deploy-docker.yml
+#   vars:
+#     docker_packages:
+#       - docker
+#       - python-docker-py
+#       - MySQL-python
+#   when: QUAY_DATABASE_CONTAINERIZE
+#   tags:
+#     - database
+
+# - name: Deploy MySQL python dependencies
+#   yum:
+#     name: MySQL-python
+#     state: latest
+#   when: not QUAY_DATABASE_CONTAINERIZE
+#   tags:
+#     - database

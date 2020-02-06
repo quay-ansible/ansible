@@ -23,7 +23,7 @@
     - database
 
 - name: Deploy mysql container
-  podman_container:
+  docker_container:
     env_file: "~/mysql-env-file"
     detach: yes
     restart: yes
@@ -38,20 +38,3 @@
     - quay-worker
     - redis
     - database
-
-# - name: Deploy mysql container
-#   docker_container:
-#     env_file: "~/mysql-env-file"
-#     detach: yes
-#     restart: yes
-#     name: "{{ MYSQL_CONTAINER_NAME }}"
-#     privileged: yes
-#     published_ports: 3306:3306
-#     volumes: /var/lib/mysql:/var/lib/mysql/data:Z
-#     image: "registry.access.redhat.com/rhscl/mysql-57-rhel7"
-#   tags:
-#     - quay
-#     - quay-config
-#     - quay-worker
-#     - redis
-#     - database
