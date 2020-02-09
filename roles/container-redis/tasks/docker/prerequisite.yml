@@ -1,5 +1,6 @@
 ---
 - name: Install Docker and dependencies
+  become: yes
   yum:
     name: "{{ docker_packages }}" 
     state: latest
@@ -12,6 +13,7 @@
     - docker
 
 - name: Start and enable docker
+  become: yes
   systemd:
     name: docker
     state: started
@@ -25,11 +27,12 @@
     - docker
 
 - name: Deploy docker to redis container host
+  become: yes
   include_tasks: tasks/deploy-docker.yml
   vars:
     docker_packages:
       - docker
       - python-docker-py
-  when: QUAY_REDIS_CONTAINERIZE
+  when: quay_redis_containerize
   tags:
     - redis

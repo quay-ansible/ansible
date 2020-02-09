@@ -6,7 +6,7 @@
     ports:
       - 6379/tcp
     firewall_zone: public
-    when: QUAY_REDIS_DEPLOY and not QUAY_REDIS_CONTAINERIZE
+    when: quay_redis_deploy and not quay_redis_containerize
   tags:
     - redis
 
@@ -16,12 +16,17 @@
     ports:
       - 6379/tcp
     firewall_zone: trusted
-    when: QUAY_REDIS_DEPLOY and QUAY_REDIS_CONTAINERIZE
+    when: quay_redis_deploy and quay_redis_containerize
+  tags:
+    - redis
+
+- name: Prerequisite redis
+  include_tasks: tasks/{{container_runtime}}/prerequisite.yml
   tags:
     - redis
 
 - name: Deploy redis container
-  include_tasks: tasks/{{ container_runtime }}.yml
-  when: QUAY_REDIS_CONTAINERIZE
+  include_tasks: tasks/{{ container_runtime }}/deploy.yml
+  when: quay_redis_containerize
   tags:
     - redis

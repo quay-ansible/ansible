@@ -1,5 +1,6 @@
 ---
 - name: Ensure firewalld is installed
+  become: yes
   yum:
     name: firewalld
     state: latest
@@ -13,6 +14,7 @@
     - database
 
 - name: Ensure firewalld is started
+  become: yes
   systemd:
     name: firewalld
     state: started
@@ -27,6 +29,7 @@
     - database
 
 - name: Add docker0 interface to trusted zone
+  become: yes
   firewalld:
     zone: trusted
     interface: docker0
@@ -43,6 +46,7 @@
     - database
 
 - name: Enable firewalld ports
+  become: yes
   firewalld:
     port: "{{ item }}"
     zone: "{{ firewall_zone }}"

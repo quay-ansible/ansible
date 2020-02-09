@@ -8,8 +8,13 @@
   tags:
     - database
 
+- name: Prerequisite PostgreSQL
+  include_tasks: tasks/{{ container_runtime }}/prerequisite.yml
+  tags:
+    - database
+
 - name: Deploy PostgreSQL
-  include_tasks: tasks/deploy-{{ container_runtime }}-container.yml
+  include_tasks: tasks/{{ container_runtime }}/deploy.yml
   tags:
     - database
 

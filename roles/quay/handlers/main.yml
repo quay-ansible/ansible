@@ -2,9 +2,11 @@
 # handlers file for quay-ansible
 
 - name: reload-firewall
+  become: yes
   command: firewall-cmd --reload
 
 - name: restart docker
+  become: yes
   systemd:
     name: docker
     state: restarted

@@ -1,5 +1,6 @@
 ---
 - name: Create {{ quay_root_dir }}/redis
+  become: yes
   file:
     path: "{{ quay_root_dir }}/redis"
     state: directory
@@ -12,6 +13,7 @@
     - database
 
 - name: Deploy Redis container
+  become: yes
   podman_container:
     detach: yes
     restart: yes

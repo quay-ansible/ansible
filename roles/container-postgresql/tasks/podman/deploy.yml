@@ -1,5 +1,6 @@
 ---
 - name: Create env file on target
+  become: yes
   template:
     src: templates/postgres-env-file
     dest: ~/postgres-env-file
@@ -11,6 +12,7 @@
     - database
 
 - name: Create {{ quay_root_dir }}/pgsql
+  become: yes
   file:
     path: "{{ quay_root_dir }}/pgsql"
     state: directory
@@ -23,6 +25,7 @@
     - database
 
 - name: Start Postgresql container
+  become: yes
   podman_container:
     env_file: "~/postgres-env-file"
     detach: yes

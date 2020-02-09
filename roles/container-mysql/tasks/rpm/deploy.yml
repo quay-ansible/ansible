@@ -1,0 +1,10 @@
+---
+- name: Deploy mysql
+  include_role:
+    name: robertdebock.mysql
+  vars:
+    _mysql_service: "{{ _quay_mysql_service }}"
+    _mysql_packages: "{{ _quay_mysql_packages }}"
+  when: not quay_database_containerize
+  tags:
+    - database

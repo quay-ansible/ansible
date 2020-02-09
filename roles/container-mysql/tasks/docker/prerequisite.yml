@@ -1,0 +1,47 @@
+---
+- name: Install Docker and dependencies
+  become: yes
+  yum:
+    name: "{{ docker_packages }}" 
+    state: latest
+  tags:
+    - quay
+    - quay-config
+    - quay-worker
+    - redis
+    - database
+    - docker
+
+- name: Start and enable docker
+  become: yes
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+  tags:
+    - quay
+    - quay-config
+    - quay-worker
+    - redis
+    - database
+    - docker
+
+# - name: Deploy docker to database container host
+#   include_tasks: tasks/deploy-docker.yml
+#   vars:
+#     docker_packages:
+#       - docker
+#       - python-docker-py
+#       - MySQL-python
+#   when: QUAY_DATABASE_CONTAINERIZE
+#   tags:
+#     - database
+
+# - name: Deploy MySQL python dependencies
+#   become: yes
+#   yum:
+#     name: MySQL-python
+#     state: latest
+#   when: not QUAY_DATABASE_CONTAINERIZE
+#   tags:
+#     - database

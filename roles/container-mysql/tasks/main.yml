@@ -6,7 +6,7 @@
     ports:
       - 3306/tcp
     firewall_zone: public
-    when: not QUAY_DATABASE_CONTAINERIZE
+    when: not quay_database_containerize
   tags:
     - database
 
@@ -16,23 +16,19 @@
     ports:
       - 3306/tcp
     firewall_zone: trusted
-    when: QUAY_DATABASE_CONTAINERIZE
+    when: quay_database_containerize
   tags:
     - database
 
-- name: Deploy conatinerized mysql
-  include_tasks: tasks/deploy-{{ container_runtime }}-container.yml
-  when: QUAY_DATABASE_CONTAINERIZE
+- name: Install prerequisites for mysql
+  include_tasks: tasks/{{ container_runtime }}/prerequisite.yml
   tags:
     - database
 
-- name: Deploy mysql
-  include_role:
-    name: robertdebock.mysql
-  vars:
-    _mysql_service: "{{ _quay_mysql_service }}"
-    _mysql_packages: "{{ _quay_mysql_packages }}"
-  when: not QUAY_DATABASE_CONTAINERIZE
+
+- name: Deploy MySQL
+  include_tasks: tasks/{{ container_runtime }}/deploy.yml
+  # when: quay_database_containerize
   tags:
     - database
 

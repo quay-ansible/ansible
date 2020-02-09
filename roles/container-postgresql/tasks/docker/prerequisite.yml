@@ -1,9 +1,10 @@
 ---
 # tasks file for ansible-role-containers-postgresql
 - name: Install postgres pre-reqs
+  become: yes
   yum:
     name: python-psycopg2
     state: latest
-  when: not QUAY_DATABASE_CONTAINERIZE
+  when: not quay_database_containerize
   tags:
     - database

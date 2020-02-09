@@ -9,14 +9,14 @@
 #       vars:
 #         with_nfs: yes
 
-# - hosts: quay_database
-#   roles:
-#     - container-mysql
-#     - container-postgresql
+- hosts: quay_database
+  roles:
+    - container-mysql
+    - container-postgresql
 
-# - hosts: quay_redis
-#   roles:
-#     - container-redis
+- hosts: quay_redis
+  roles:
+    - container-redis
 
 - hosts: quay
   roles:

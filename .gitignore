@@ -8,6 +8,9 @@ roles/robertdebock.mysql*
 ## Ansible-Inventory
 inventory/group_vars/all.yml
 inventory/hosts.ini
+*.yaml
+*.gz
+*.sql
 
 ## Ansible-Vault
 *.vault
