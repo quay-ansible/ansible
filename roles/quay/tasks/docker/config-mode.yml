@@ -1,19 +1,20 @@
 ---
 - name: Start quay in config mode
+  become: yes
   docker_container:
     detach: yes
     restart: no
     name: "quay-config"
     privileged: yes
-    published_ports: "{{ QUAY_CONFIG_PORT }}:8443"
-    image: "{{ QUAY_IMAGE_VERSION }}"
-    command: "config {{ QUAY_CONFIG_PASSWORD }}"
+    published_ports: "{{ quay_config_port }}:8443"
+    image: "{{ quay_image_version }}"
+    command: "config {{ quay_config_password }}"
   tags:
     - quay-config
 
-- name: "Go login to quay host on port {{ QUAY_CONFIG_PORT }}"
+- name: "Go login to quay host on port {{ quay_config_port }}"
   debug:
-    msg: "Login to {{ inventory_hostname }}:{{ QUAY_CONFIG_PORT }} using username quayconfig and password {{ QUAY_CONFIG_PASSWORD }}"
+    msg: "Login to {{ inventory_hostname }}:{{ quay_config_port }} using username quayconfig and password {{ QUAY_CONFIG_PASSWORD }}"
   tags:
     - quay-config
 

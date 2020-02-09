@@ -1,5 +1,6 @@
 ---
 - name: Start quay in config mode
+  become: yes
   podman_container:
     detach: yes
     restart: no

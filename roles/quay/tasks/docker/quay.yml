@@ -1,5 +1,6 @@
 ---
 - name: ensure that quay config is stopped
+  become: yes
   docker_container:
     name: quay-config
     state: stopped
@@ -8,6 +9,7 @@
     - quay
 
 - name: "create quay config directory"
+  become: yes
   file:
     state: directory
     path: "{{ quay_root_dir }}/config"
@@ -15,6 +17,7 @@
     - quay
 
 - name: "create quay storage directory (when object storage is not available)"
+  become: yes
   file:
     state: directory
     path: "{{ quay_root_dir }}/storage"
@@ -23,6 +26,7 @@
     - quay
 
 - name: copy the tarball to the quay host
+  become: yes
   unarchive:
     src: "{{ quay_config_tar }}"
     dest: "{{ quay_root_dir }}/config/"
@@ -32,6 +36,7 @@
     - deploy-config
 
 - name: start quay
+  become: yes
   docker_container:
     detach: yes
     restart: yes

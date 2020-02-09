@@ -1,5 +1,6 @@
 ---
 - name: Ensure that quay config is stopped
+  become: yes
   podman_container:
     name: quay-config
     state: stopped
@@ -8,6 +9,7 @@
     - quay
 
 - name: Create quay config directory
+  become: yes
   file:
     state: directory
     path: "{{ quay_root_dir }}/config"
@@ -15,6 +17,7 @@
     - quay
 
 - name: "Create quay storage directory (when object storage is not available)"
+  become: yes
   file:
     state: directory
     path: "{{ quay_root_dir }}/storage"
@@ -23,6 +26,7 @@
     - quay
 
 - name: Copy the tarball to the quay host
+  become: yes
   unarchive:
     src: "{{ quay_config_tar }}"
     dest: "{{ quay_root_dir }}/config/"
@@ -32,6 +36,7 @@
     - deploy-config
 
 - name: Start quay
+  become: yes
   podman_container:
     detach: yes
     restart: yes
