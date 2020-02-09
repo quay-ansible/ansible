@@ -1,11 +1,11 @@
 ---
 - name: Ensure that the mysql container is running and quay db exists
   mysql_db:
-    name: "{{ MYSQL_DATABASE }}"
+    name: "{{ mysql_database }}"
     state: present
     login_host: 127.0.0.1
     login_user: root
-    login_password: "{{ MYSQL_ROOT_PASSWORD }}"
+    login_password: "{{ mysql_root_password }}"
   register: mysql_result
   until: mysql_result is succeeded
   retries: 5
@@ -16,11 +16,11 @@
     - quay-worker
     - redis
     - database
-  when: QUAY_DATABASE_CONTAINERIZE
+  when: quay_database_containerize
 
 - name: Ensure that the mysql container is running and quay db exists
   mysql_db:
-    name: "{{ MYSQL_DATABASE }}"
+    name: "{{ mysql_database }}"
     state: present
     login_host: 127.0.0.1
     login_user: root
@@ -34,4 +34,4 @@
     - quay-worker
     - redis
     - database
-  when: not QUAY_DATABASE_CONTAINERIZE
+  when: not quay_database_containerize

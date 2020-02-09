@@ -1,0 +1,17 @@
+---
+# tasks file for quay-ansible
+- name: Login to quay.io
+  become: yes
+  docker_login:
+    username: "{{ quay_io_username }}"
+    password: "{{ quay_io_password }}"
+    registry: "{{ quay_io_registry_url }}"
+  when: quay_io_username is defined
+
+- name: Login to Red Hat Registry
+  become: yes
+  docker_login:
+    username: "{{ upstream_registry_username }}"
+    password: "{{ upstream_registry_password }}"
+    registry: "{{ upstream_registry_url }}"
+  when: upstream_registry_username is defined

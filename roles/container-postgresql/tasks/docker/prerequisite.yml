@@ -5,6 +5,5 @@
   yum:
     name: python-psycopg2
     state: latest
-  when: not quay_database_containerize
   tags:
     - database

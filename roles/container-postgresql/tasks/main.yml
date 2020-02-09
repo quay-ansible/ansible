@@ -13,6 +13,9 @@
   tags:
     - database
 
+- name: Login to registry
+  include_tasks: tasks/{{container_runtime}}/login.yml
+
 - name: Deploy PostgreSQL
   include_tasks: tasks/{{ container_runtime }}/deploy.yml
   tags:

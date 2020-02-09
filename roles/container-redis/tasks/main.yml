@@ -25,6 +25,11 @@
   tags:
     - redis
 
+- name: Login to registry
+  include_tasks: tasks/{{container_runtime}}/login.yml
+  tags:
+    - redis
+
 - name: Deploy redis container
   include_tasks: tasks/{{ container_runtime }}/deploy.yml
   when: quay_redis_containerize

@@ -26,13 +26,13 @@
     - database
     - docker
 
-- name: Deploy docker to redis container host
-  become: yes
-  include_tasks: tasks/deploy-docker.yml
-  vars:
-    docker_packages:
-      - docker
-      - python-docker-py
-  when: quay_redis_containerize
-  tags:
-    - redis
+# - name: Deploy docker to redis container host
+#   become: yes
+#   include_tasks: tasks/deploy-docker.yml
+#   vars:
+#     docker_packages:
+#       - docker
+#       - python-docker-py
+#   when: quay_redis_containerize
+#   tags:
+#     - redis
